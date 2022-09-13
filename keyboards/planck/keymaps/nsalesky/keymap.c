@@ -19,7 +19,8 @@
 
 
 enum planck_layers {
-  _QWERTY,
+  _QWERTY, // the default layer for Windows and Linux
+  _MAC, // the default layer for Mac OS X where Ctrl and Cmd swap places
   /* _COLEMAK, */
   /* _DVORAK, */
   _LOWER,
@@ -31,6 +32,7 @@ enum planck_layers {
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
+  MAC,
   /* COLEMAK, */
   /* DVORAK, */
   /* PLOVER, */
@@ -51,14 +53,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * |  Shift  |    Z    |    X    |    C    |    V    |    B    |    N    |    M    |    ,    |    .    |    /    |    ]    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * | <Leader>|   Alt   |  SUPER  |  Bspc   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |   Alt   |  Shift  |
+ * |   Alt   |  Leader |  SUPER  |   NAV   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |   Alt   |  Shift  |
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    KC_LBRC,
-    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, KC_QUOT,
-    KC_LSFT,        KC_Z,    KC_X,    KC_C,    KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, KC_RBRC,
-    KC_LEAD,        KC_LALT, KC_LGUI, KC_BSPC, LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LALT, KC_LSFT
+    KC_TAB,         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    KC_LBRC,
+    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,   KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, KC_QUOT,
+    KC_LSFT,        KC_Z,    KC_X,    KC_C,   KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, KC_RBRC,
+    KC_LALT,        KC_LEAD, KC_LGUI, NAV,    LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LALT, KC_LSFT
+),
+
+/* Qwerty
+ * ,-----------------------------------------------------------------------------------------------------------------------.
+ * |   Tab   |    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    |    [    |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * | Ctl(Esc)|    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    |    '    |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |  Shift  |    Z    |    X    |    C    |    V    |    B    |    N    |    M    |    ,    |    .    |    /    |    ]    |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * | <Leader>|   Alt   |  SUPER  |   NAV   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |   Alt   |  Shift  |
+ * `-----------------------------------------------------------------------------------------------------------------------'
+ */
+[_MAC] = LAYOUT_planck_grid(
+    KC_TAB,         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    KC_LBRC,
+    GUI_T(KC_ESC),  KC_A,    KC_S,    KC_D,   KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, KC_QUOT,
+    KC_LSFT,        KC_Z,    KC_X,    KC_C,   KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, KC_RBRC,
+    KC_LEAD,        KC_LALT, KC_LCTL, NAV,    LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LALT, KC_LSFT
 ),
 
 /* Lower
@@ -69,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * |         |   F7    |   F8    |   F9    |   F10   |   F11   |   F12   |         |         |         |         |    )    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         |         |  Adjust |         |         |         |         |
+ * |         |         |         |         |         |         |         |  ADJUST |         |         |         |         |
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_planck_grid(
@@ -87,22 +107,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * |         |         |         |         |         |         |         |         |         |         |         |    )    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |  Adjust |         |         |         |         |         |         |         |
+ * |         |         |         |         |  ADJUST |         |         |         |         |         |         |         |
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_grid(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, LSFT(KC_9),
-    _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, _______, KC_BSLS,
-    _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, LSFT(KC_0),
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, LSFT(KC_MINS), LSFT(KC_EQL), LSFT(KC_9),
+    _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______,       _______,      KC_BSLS,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,       _______,      LSFT(KC_0),
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,       _______,      _______
 ),
 
 /* Adjust (Lower + Raise)
  *                      v------------------------RGB CONTROL--------------------v
  * ,-----------------------------------------------------------------------------------.
- * |      | Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
+ * |WN/LNX| Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|Qwerty|Colemk|Dvorak|Plover|      |
+ * | MAC  |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|Qwerty|Colemk|Dvorak|Plover|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|TermOn|TermOf|      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -110,8 +130,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
-    _______, QK_BOOT,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______ ,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______,  _______,
+    QWERTY,  QK_BOOT, DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______ ,
+    MAC,     _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______,  _______,
     _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 ),
@@ -174,7 +194,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_single_persistent_default_layer(_QWERTY);
       }
       return false;
-      break;
+  case MAC:
+      if (record->event.pressed) {
+        print("mode just switched to mac and this is a huge string\n");
+        set_single_persistent_default_layer(_MAC);
+      }
+      return false;
+      
     /* case COLEMAK: */
     /*   if (record->event.pressed) { */
     /*     set_single_persistent_default_layer(_COLEMAK); */
