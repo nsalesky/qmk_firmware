@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------------------------------------------.
- * |   Tab   |    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    | Shift [ |
+ * |Shift Tab|    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    | Shift [ |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * | Ctl(Esc)|    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    | Ctl(')  |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_TAB,         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    SFT_T(KC_LBRC),
+    SFT_T(KC_TAB),         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    SFT_T(KC_LBRC),
     CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,   KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, CTL_T(KC_QUOT),
     KC_LSFT,        KC_Z,    KC_X,    KC_C,   KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, SFT_T(KC_RBRC),
     KC_LALT,        KC_LEAD, KC_LGUI, NAV,    LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LALT, KC_LALT
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty (Mac mode)
  * ,-----------------------------------------------------------------------------------------------------------------------.
- * |   Tab   |    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    | Shift [ |
+ * |Shift Tab|    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    | Shift [ |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * | Ctl(Esc)|    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    | Ctl(')  |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
 [_MAC] = LAYOUT_planck_grid(
-    KC_TAB,         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    SFT_T(KC_LBRC),
+    SFT_T(KC_TAB),         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    SFT_T(KC_LBRC),
     GUI_T(KC_ESC),  KC_A,    KC_S,    KC_D,   KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, CTL_T(KC_QUOT),
     KC_LSFT,        KC_Z,    KC_X,    KC_C,   KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, SFT_T(KC_RBRC),
     KC_LALT,        KC_LEAD, KC_LCTL, NAV,    LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LALT, KC_LALT
