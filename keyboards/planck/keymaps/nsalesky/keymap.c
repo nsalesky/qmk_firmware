@@ -47,9 +47,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------------------------------------------.
- * |Shift Tab|    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    |    [    |
+ * |   Tab   |    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    |    [    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * | Ctl(Esc)|    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    |  Ctl(') |
+ * |   Esc   |  GUI(A) |  ALT(S) |  CTL(D) |  SFT(F) |    G    |    H    |  SFT(J) |  CTL(K) |  ALT(L) |  GUI(;) |    '    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * |  Shift  |    Z    |    X    |    C    |    V    |    B    |    N    |    M    |    ,    |    .    |    /    | Shift ] |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
@@ -57,10 +57,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    SFT_T(KC_TAB),  KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    KC_LBRC,
-    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,   KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, CTL_T(KC_QUOT),
-    KC_LSFT,        KC_Z,    KC_X,    KC_C,   KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, SFT_T(KC_RBRC),
-    KC_LALT,        KC_LGUI, _______, NAV,    LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LGUI, KC_LALT
+    KC_TAB,  KC_Q,         KC_W,         KC_E,         KC_R,              KC_T,    KC_Y,     KC_U,              KC_I,         KC_O,         KC_P,            KC_LBRC,
+    KC_ESC,  LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),      KC_G,    KC_H,     RSFT_T(KC_J),      RCTL_T(KC_K), LALT_T(KC_L), RGUI_T(KC_SCLN), KC_QUOT,
+    KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_V,              KC_B,    KC_N,     KC_M,              KC_COMM,      KC_DOT,       KC_SLSH,         SFT_T(KC_RBRC),
+    KC_LALT, KC_LGUI,      _______,      NAV,          LT(LOWER, KC_ENT), KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT), KC_BSPC,      NAV,          KC_LGUI,         KC_LALT
 ),
 
 /* Qwerty (Mac mode)
