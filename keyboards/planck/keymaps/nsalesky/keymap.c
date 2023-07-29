@@ -20,8 +20,7 @@
 
 enum planck_layers {
   _QWERTY, // the default layer for Windows and Linux
-  _MAC, // the default layer for Mac OS X where Ctrl and Cmd swap places
-  /* _COLEMAK, */
+  _COLEMAK,
   /* _DVORAK, */
   _LOWER,
   _RAISE,
@@ -32,8 +31,7 @@ enum planck_layers {
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
-  MAC,
-  /* COLEMAK, */
+  COLEMAK,
   /* DVORAK, */
   /* PLOVER, */
   BACKLIT,
@@ -63,22 +61,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LALT, KC_LGUI,      _______,      NAV,          LT(LOWER, KC_ENT), KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT), KC_BSPC,      NAV,          KC_LGUI,         KC_LALT
 ),
 
-/* Qwerty (Mac mode)
+/* Colemak
  * ,-----------------------------------------------------------------------------------------------------------------------.
- * |Shift Tab|    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    | Shift [ |
+ * |   Tab   |    Q    |    W    |    F    |    P    |    B    |    J    |    L    |    U    |    Y    |    ;    |    [    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * | Sup(Esc)|    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    | Sup(')  |
+ * |   Esc   |  GUI(A) |  ALT(R) |  CTL(S) |  SFT(T) |    G    |    M    |  SFT(N) |  CTL(E) |  ALT(I) |  GUI(O) |    '    |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |  Shift  |    Z    |    X    |    C    |    V    |    B    |    N    |    M    |    ,    |    .    |    /    | Shift ] |
+ * |  Shift  |    Z    |    X    |    C    |    D    |    V    |    K    |    H    |    ,    |    .    |    /    | Shift ] |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |   Alt   |   Ctl   | <Leader>|   NAV   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |   Ctl   |   Alt   |
+ * |   Alt   |  Super  |         |   NAV   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |  Super  |   Alt   |
  * `-----------------------------------------------------------------------------------------------------------------------'
  */
-[_MAC] = LAYOUT_planck_grid(
-    SFT_T(KC_TAB),         KC_Q,    KC_W,    KC_E,   KC_R,               KC_T,    KC_Y,     KC_U,               KC_I,    KC_O,   KC_P,    SFT_T(KC_LBRC),
-    GUI_T(KC_ESC),  KC_A,    KC_S,    KC_D,   KC_F,               KC_G,    KC_H,     KC_J,               KC_K,    KC_L,   KC_SCLN, GUI_T(KC_QUOT),
-    KC_LSFT,        KC_Z,    KC_X,    KC_C,   KC_V,               KC_B,    KC_N,     KC_M,               KC_COMM, KC_DOT, KC_SLSH, SFT_T(KC_RBRC),
-    KC_LALT,        KC_LCTL, KC_LGUI, NAV,    LT(LOWER, KC_ENT),  KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT),  KC_BSPC, NAV,    KC_LCTL, KC_LALT
+[_COLEMAK] = LAYOUT_planck_grid(
+    KC_TAB,  KC_Q,         KC_W,         KC_F,         KC_P,              KC_B,    KC_J,     KC_L,              KC_U,         KC_Y,         KC_SCLN,       KC_LBRC,
+    KC_ESC,  LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T),      KC_G,    KC_M,     RSFT_T(KC_N),      RCTL_T(KC_E), LALT_T(KC_I), RGUI_T(KC_O),  KC_QUOT,
+    KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_D,              KC_V,    KC_K,     KC_H,              KC_COMM,      KC_DOT,       KC_SLSH,       SFT_T(KC_RBRC),
+    KC_LALT, KC_LGUI,      _______,      NAV,          LT(LOWER, KC_ENT), KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT), KC_BSPC,      NAV,          KC_LGUI,       KC_LALT
 ),
 
 /* Lower
@@ -120,9 +118,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Adjust (Lower + Raise)
  *                      v------------------------RGB CONTROL--------------------v
  * ,-----------------------------------------------------------------------------------.
- * |WN/LNX| Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
+ * |QWERTY| Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | MAC  |      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|      |      |      |      |
+ * |COLEMK|      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|Musoff|      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -131,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_planck_grid(
     QWERTY,  QK_BOOT, DB_TOGG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______ ,
-    MAC,     _______, _______,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______,  _______,
+    COLEMAK, _______, _______,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______,  _______,
     _______, AU_PREV,  AU_NEXT,  MU_ON,   MU_OFF,  _______,   _______,  _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 ),
@@ -194,10 +192,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_single_persistent_default_layer(_QWERTY);
       }
       return false;
-  case MAC:
+  case COLEMAK:
       if (record->event.pressed) {
-        print("mode just switched to mac and this is a huge string\n");
-        set_single_persistent_default_layer(_MAC);
+        print("mode just switched to colemak and this is a huge string\n");
+        set_single_persistent_default_layer(_COLEMAK);
       }
       return false;
 
