@@ -19,9 +19,10 @@
 
 
 enum planck_layers {
-  _QWERTY, // the default layer for Windows and Linux
-  _COLEMAK,
-  /* _DVORAK, */
+  _QWERTY,  // the default layer for Windows and Linux
+  _GAMING,  // has a simpler layout with some modifiers moved around for Gaming
+  _EMACS,   // no home row mods, just simple palm modifiers that are easy to hit with Emacs keybindings
+  _COLEMAK, // Colemak layout
   _LOWER,
   _RAISE,
   /* _PLOVER, */
@@ -31,9 +32,9 @@ enum planck_layers {
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
+  GAMING,
+  EMACS,
   COLEMAK,
-  /* DVORAK, */
-  /* PLOVER, */
   BACKLIT,
 };
 
@@ -57,6 +58,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,         KC_W,         KC_E,         KC_R,              KC_T,    KC_Y,     KC_U,              KC_I,         KC_O,         KC_P,            KC_LBRC,
     KC_ESC,  LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),      KC_G,    KC_H,     RSFT_T(KC_J),      RCTL_T(KC_K), LALT_T(KC_L), RGUI_T(KC_SCLN), KC_QUOT,
+    KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_V,              KC_B,    KC_N,     KC_M,              KC_COMM,      KC_DOT,       KC_SLSH,         SFT_T(KC_RBRC),
+    KC_LALT, KC_LGUI,      _______,      NAV,          LT(LOWER, KC_ENT), KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT), KC_BSPC,      NAV,          KC_LGUI,         KC_LALT
+),
+
+/* Gaming
+ * ,-----------------------------------------------------------------------------------------------------------------------.
+ * |   Tab   |    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    |   Tab   |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |   Esc   |    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    |    '    |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |  Shift  |    Z    |    X    |    C    |    V    |    B    |    N    |    M    |    ,    |    .    |    /    | Shift   |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |   LCtl  |  Alt    |  Super  |   NAV   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |   Alt   |   RCtl   |
+ * `-----------------------------------------------------------------------------------------------------------------------'
+ */
+[_GAMING] = LAYOUT_planck_grid(
+        KC_TAB,  KC_Q,  KC_W,   KC_E,   KC_R,       KC_T,    KC_Y,     KC_U,              KC_I,         KC_O,         KC_P,            KC_TAB,
+        KC_ESC,  KC_A, KC_S, KC_D, KC_F,    KC_G,    KC_H,     KC_J,      KC_K, KC_L, KC_SCLN, KC_QUOT,
+        KC_LSFT, KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,    KC_N,     KC_M,              KC_COMM,      KC_DOT,       KC_SLSH,         KC_RSFT,
+        KC_LCTL, KC_LALT,      KC_LGUI,      NAV,   LT(LOWER, KC_ENT), KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT), KC_BSPC,      NAV,          KC_RALT,         KC_RCTL
+),
+
+/* Emacs
+ * ,-----------------------------------------------------------------------------------------------------------------------.
+ * |   Tab   |    Q    |    W    |    E    |    R    |    T    |    Y    |    U    |    I    |    O    |    P    |    [    |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * | CTL(ESC)|    A    |    S    |    D    |    F    |    G    |    H    |    J    |    K    |    L    |    ;    |    '    |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |  Shift  |    Z    |    X    |    C    |    V    |    B    |    N    |    M    |    ,    |    .    |    /    | Shift ] |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |   Alt   |  Super  |         |   NAV   |En(LOWER)|  Space  |  Space  |En(RAISE)|   Bspc  |   NAV   |  Super  |   Alt   |
+ * `-----------------------------------------------------------------------------------------------------------------------'
+ */
+[_EMACS] = LAYOUT_planck_grid(
+    KC_TAB,  KC_Q,         KC_W,         KC_E,         KC_R,              KC_T,    KC_Y,     KC_U,              KC_I,         KC_O,         KC_P,            KC_LBRC,
+    LCTL_T(KC_ESC),  KC_A, KC_S, KC_D, KC_F,      KC_G,    KC_H,     KC_J,      KC_K, KC_L, KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_V,              KC_B,    KC_N,     KC_M,              KC_COMM,      KC_DOT,       KC_SLSH,         SFT_T(KC_RBRC),
     KC_LALT, KC_LGUI,      _______,      NAV,          LT(LOWER, KC_ENT), KC_SPC,  KC_SPC,   LT(RAISE, KC_ENT), KC_BSPC,      NAV,          KC_LGUI,         KC_LALT
 ),
@@ -120,18 +157,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |QWERTY| Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |COLEMK|      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|      |      |      |      |
+ * |GAMING|      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Voice-|Voice+|Mus on|Musoff|      |      |      |      |      |      |      |
+ * |EMACS |Voice-|Voice+|Mus on|Musoff|      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |      |      |      |      |
+ * |COLEMK|      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
     QWERTY,  QK_BOOT, DB_TOGG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______ ,
-    COLEMAK, _______, _______,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______,  _______,
-    _______, AU_PREV,  AU_NEXT,  MU_ON,   MU_OFF,  _______,   _______,  _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
+    GAMING, _______, _______,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______,  _______,
+    EMACS, AU_PREV,  AU_NEXT,  MU_ON,   MU_OFF,  _______,   _______,  _______, _______, _______, _______, _______,
+    COLEMAK, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 ),
 
 /* Navigation
@@ -151,15 +188,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_INS , KC_HOME, KC_DEL , _______, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
-
-/*
-[_GAMING] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-),
-*/
 
 /*
   This is an empty layer definition that I can copy for future layers
@@ -190,6 +218,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         print("mode just switched to qwerty and this is a huge string\n");
         set_single_persistent_default_layer(_QWERTY);
+      }
+      return false;
+  case GAMING:
+      if (record->event.pressed) {
+        print("mode just switched to gaming and this is a huge string\n");
+        set_single_persistent_default_layer(_GAMING);
+      }
+      return false;
+  case EMACS:
+      if (record->event.pressed) {
+        print("mode just switched to emacs and this is a huge string\n");
+        set_single_persistent_default_layer(_EMACS);
       }
       return false;
   case COLEMAK:
